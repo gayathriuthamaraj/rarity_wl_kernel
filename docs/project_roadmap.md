@@ -8,4 +8,4 @@
 6. Implement candidate, run controlled evaluation, and analyze uncertainty.
 7. Write final report and archive reproducibility artifacts.
 
-Current progress: repository scaffolding is in place; all four paper-linked variants are acquired and structurally validated; no algorithms or experiments are complete.
+Current progress: Part 1 (Research gap analysis) and Part 2 (Baseline implementation) are complete. The standard WL subtree kernel, dataset loader, initial-label conventions, feature extraction, and comprehensive unit tests (hand-verified calculations, isomorphism invariance, PSD checks, and EGO-1 end-to-end tests) are fully implemented and verified.
