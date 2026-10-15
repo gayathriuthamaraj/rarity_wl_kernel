@@ -193,7 +193,10 @@ def test_initial_labeling_options():
 
 
 def test_egonets_e2e_dataset():
-    """Validate baseline WL subtree kernel on actual downloaded EGO-1 graphs."""
+    """Validate baseline WL subtree kernel on actual downloaded EGO-1 graphs if present."""
+    from pathlib import Path
+    if not (Path("data/raw/EGO-1").is_dir() or Path("EGO-1").is_dir()):
+        pytest.skip("EGO-1 dataset files not present locally (raw data is gitignored).")
     graphs = load_dataset("EGO-1")
     assert len(graphs) == 200
 
