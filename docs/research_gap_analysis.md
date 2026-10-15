@@ -1,55 +1,79 @@
-# Research-gap analysis
+# Research-gap analysis: rarity weighting for WL graph features
 
-## Original motivation
+## 1. Project aim
 
-The candidate motivation is that exact WL subtree matches can become sparse at greater refinement depth, especially on dense or structurally varied graphs. A training-corpus document-frequency statistic might change the influence of common versus rare exact patterns while preserving the WL feature identities. This is a hypothesis, not a demonstrated EGONETS result.
+This project asks whether weighting Weisfeiler–Lehman (WL) graph features by how widely they occur across a training collection changes graph-classification performance on the four EGONETS benchmarks. The standard WL subtree kernel is the baseline. A graph-document-frequency weighting rule is a proposed candidate only: it has not been implemented, validated, or tested here. This document is a focused literature assessment, not a claim of novelty.
 
-## Related work comparison
+## 2. Concepts in plain language
 
-| Approach | Feature/similarity mechanism | How it relates |
+A graph is a set of points (vertices) and links (edges). A social graph can represent people as points and relationships as links. An ego network centers on one person and includes that person's neighbors and links among them. Graph classification assigns one label to a whole graph; here the benchmark labels indicate the source social network, although the integer-to-network mapping is not supplied with the files.
+
+A graph kernel is a rule for measuring similarity between two graphs. It lets a classifier such as an SVM use graph structure without first forcing each graph into a fixed-size hand-designed vector. The WL subtree kernel makes explicit feature counts, then compares two graphs with a dot product. In that sense, each graph has a structural “fingerprint” made of counts of local patterns.
+
+## 3. Standard WL subtree kernel
+
+At depth 0, each node has its initial label (for an unlabeled graph, a common initial label is used). At each next depth, WL combines a node's current label with the sorted multiset of its neighbors' current labels and assigns a new compressed label. Labels at depth 1 therefore describe a node and its immediate neighbors; depth 2 includes information about neighbors' neighborhoods. A graph feature is the count of nodes with each exact label at each included depth. The standard subtree kernel sums dot products of those count vectors over depths. Shervashidze et al. give the relabeling algorithm and feature map in Algorithm 1 and Definition 4, and the depth-summed kernel in Equations (1)–(2), printed pp. 2542–2547 ([paper](https://jmlr.csail.mit.edu/papers/volume12/shervashidze11a/shervashidze11a.pdf)).
+
+Deeper refinement captures larger neighborhoods, but exact patterns can become rare: two similar neighborhoods may receive different labels after one small structural change. The generalized WL paper reports that almost all depth-2 unfolding trees occur only once in each EGONETS variant, so exact matching offers little structural reuse beyond degrees in that setting. This is the authors' reported observation, not evidence that rarity weighting improves results ([Schulz et al.](https://pwelke.de/publications/schulz2022mach.pdf), §6.1.1, printed p. 2616).
+
+## 4. A small example: exact matches and rarity
+
+Imagine two root nodes whose neighborhoods are stars: one root has two leaf neighbors, while the other has three. With a common initial node label, their depth-0 root labels match. At depth 1, their root labels differ because the neighbor multisets have different sizes. Standard WL counts these as two different root features; it does not call them “almost the same.” A generalized method can compare the corresponding neighborhood trees and may treat them as close, depending on its edit cost and clustering. A rarity-weighted method keeps the two exact features separate and only changes their influence based on how many training graphs contain each one. This example describes the root features, not the full kernel value of the two graphs.
+
+## 5. Published generalized WL versus the proposed candidate
+
+Schulz et al.'s generalized WL (including the R-WL* approximation) relaxes exact label equality. It compares unfolding trees using a structure- and depth-preserving edit distance, clusters similar trees using Wasserstein k-means, and counts cluster assignments as features. Their PSD argument follows from an explicit cluster-count feature map. This changes which patterns can match. The standard WL framework's nonnegative coefficients across refinement depths are depth-level weights, not per-pattern document-frequency weights; attribute that general depth weighting to the baseline formulation, not as the candidate method.
+
+The candidate considered here retains standard exact WL labels and counts. For each feature coordinate it would estimate the fraction of *training graphs* containing that feature and apply a smoothed inverse-frequency scale. It changes feature influence, not the definition of a match. It is not generalized WL, R-WL, or an implementation of either paper.
+
+## 6. What prior research says
+
+The [literature review](literature_review.md) records the search limits, publication details, and source inspection extent. Important findings:
+
+| Work | Published method | Relation to this candidate |
 |---|---|---|
-| Standard WL subtree kernel (Shervashidze et al., 2011) | Inner product of exact WL-label count vectors, summed across depths | Baseline. No pattern-specific corpus frequency weighting in the standard definition. |
-| Generalized WL / R-WL (Schulz et al., 2022) | Structure- and depth-preserving edit distances between unfolding trees; cluster and count similar labels | Addresses sparse exact matches by changing pattern matching. Not IDF. Also allows nonnegative weights across depths, not per-pattern corpus weights. |
-| Learned subtree-pattern importance in WWL (Nguyen et al., 2021) | Paper abstract says subtree-pattern weights are learned for WWL kernels | Strong conceptual precedent for pattern-specific weighting. Exact relation to this candidate cannot be assessed fully from the publisher/author-repository records and accessible abstract; the full text endpoint returned 403 in this review. It is not established here as mathematically equivalent. |
-| VeRNAl (Oliver et al., 2021/2022) | Supplement reports trying IDF terms that multiply pairwise comparison scores in an edge-labeled WL graphlet-hashing method for RNA motif matching | Direct precedent for IDF in a WL-based representation. It is not the same documented formula/task: IDF is within graphlet pairwise matching; this candidate weights exact WL histogram coordinates using graph-level document frequency. The supplement does not give enough detail to decide full mathematical equivalence. |
-| Proposed candidate | Unsupervised train-fold graph document frequency, then per-coordinate IDF rescaling of exact WL counts | A simple IDF-style transfer to graph feature histograms; its exact prior-art status remains open. |
+| Shervashidze et al. (2011) | Exact WL label-count features with a depth-summed inner product | Baseline; no corpus IDF in the standard definition. |
+| Schulz et al. (2022) | Unfolding-tree edit distance, clustering, and cluster-count features | Addresses exact-match sparsity by changing similarity, not by weighting exact coordinates. |
+| Nguyen et al. (2021) | Learns subtree-pattern importance for a Wasserstein WL kernel | Strong precedent for pattern importance. Full text was not accessible in this review, so exact mathematical overlap is unresolved. |
+| Oliver et al. (2021/2022), VeRNAl | Reports IDF-scaled pairwise comparison values in an edge-labeled WL graphlet-hashing method for RNA motif matching | Direct IDF/WL precedent, but its feature unit, similarity task, and documented operation differ from graph-document-frequency weighting of exact WL histogram coordinates. |
+| Bulut et al. (2021), SYS2VEC | Applies TF-IDF to node content before WL hashing and Graph2Vec-style system embeddings | Uses TF-IDF and WL in one pipeline, but does not apply IDF to WL subtree histogram coordinates or define a standard WL graph kernel. |
+| Kriege et al. (2020) | Survey of graph-kernel methods | Background, not a new weighting rule. |
 
-## What is known
+The exact candidate formula was not found in the sources reviewed. That does not establish novelty: this was a focused search, not a systematic review, and learned pattern weighting and IDF in WL-related methods are already published.
 
-- WL subtree kernels already use explicit feature counts for exact depth-specific labels.
-- The generalized WL method changes neighborhood comparison through edit-distance-based similarity and clustering, and reports that most depth-2 EGONETS unfolding trees are unique. That finding supports the sparsity motivation but does not show IDF weighting works.
-- Published work has explored learning the importance of subtree patterns in a WL-related Wasserstein kernel. Consequently, the broad claim “weighting WL patterns is novel” is not defensible.
-- IDF weighting has been tried in a WL-based edge-graphlet matching method; thus, the broad combination of IDF with WL-derived graph structures has prior art. The reviewed sources do not establish whether it is mathematically equivalent to `df(s) = number of training graphs containing s` followed by this smoothed IDF on exact WL histogram coordinates.
-- The literature check was focused rather than systematic. An absence of a hit is not proof of novelty.
+## 7. Research problem and gap assessment
 
-## Candidate mathematics and choices
+The defensible question is narrow: **does fold-local, unsupervised graph-document-frequency scaling of exact WL subtree counts add predictive value on these EGONETS files, after controlling for graph normalization and refinement depth?** This is an empirical comparison, not a claim that frequency weighting or feature weighting in WL is new. The gap is at most a specific, not-yet-verified formula-and-benchmark comparison. Evidence for a novelty claim is weak; broader prior-art search and the Nguyen full text are still needed.
 
-For a WL feature `s`, let `c_G(s)` count its occurrences in graph `G`. In a training fold containing `N` graphs, define `df(s)` as the number of those graphs with `c_G(s) > 0`, and `a(s) = log((N + 1)/(df(s) + 1)) + 1`.
+## 8. Candidate mathematics and design choices
 
-The proposed representation `phi(G)[s] = a(s)c_G(s)` produces
+For feature `s`, let `c_G(s)` be its occurrence count in graph `G`. In a training fold with `N_train` graphs, define graph document frequency as
 
-`K(G,H) = sum_s a(s)^2 c_G(s)c_H(s)`.
+```text
+df(s) = number of training graphs G with c_G(s) > 0
+a(s)  = log((N_train + 1) / (df(s) + 1)) + 1
+```
 
-Thus the stated vector formula applies the square of IDF to each pairwise feature contribution. If the intended contribution weight is one power of IDF, the corresponding feature coordinates would use `sqrt(a(s)) c_G(s)`. Either fixed nonnegative coordinate scaling gives an explicit inner-product PSD kernel. The distinction must be settled before implementation and named unambiguously.
+The candidate vector in the current project brief, `phi(G)[s] = a(s)c_G(s)`, induces
 
-With the proposed smoothing, weights are finite and at least one: a feature present in every training graph has weight 1; a feature absent from all training graphs has maximum weight `log(N + 1) + 1`, though such a feature contributes nothing to any training-training kernel entry. If it appears only in a validation graph, that feature must not change training-derived weights; the unseen feature can be assigned the predeclared zero-training-frequency weight, based on the training fold alone. The formula uses presence/absence across graphs for `df`, while the feature count remains the term-frequency factor. It does not use labels and is unsupervised.
+```text
+K(G,H) = sum_s a(s)^2 c_G(s)c_H(s)
+```
 
-Estimate `df` using training graphs only inside each CV split. Freeze the resulting vocabulary/weights for train and held-out graphs in that split. Computing frequencies using held-out graphs leaks information about the evaluation distribution even without labels.
+Thus the dot product uses squared IDF as the contribution weight. If the intended kernel contribution is weighted by one power of `a(s)`, use coordinates `sqrt(a(s))c_G(s)`. Both are fixed nonnegative coordinate scalings and therefore define explicit inner-product PSD kernels; choose and document one before implementation. `df` counts graphs containing a feature, not total feature occurrences. The within-graph count remains the term-frequency factor.
 
-Raw count inner products can favor larger graphs and graphs with more active WL coordinates. Compare like-for-like kernel normalization, such as cosine normalization `K(G,H)/sqrt(K(G,G)K(H,H))`, and explicitly state how zero diagonals are handled. Normalization changes the effective method; do not conflate its effect with IDF. Per-depth normalization or weights can also change scale between refinement levels and should be separate from per-feature rarity weights.
+Fit vocabulary statistics and weights using only each training fold, then freeze them for held-out graphs. Using held-out graphs to calculate frequencies leaks information about the evaluation distribution even though labels are not used. This rule is unsupervised. A feature absent in training can receive the formula's maximum smoothed weight, but contributes zero against training feature vectors; handling for test-only coordinates should be explicitly fixed.
 
-Recommended ablations: (1) exact WL baseline with raw counts; (2) same baseline with graph-level normalization; (3) IDF weights with raw counts; (4) IDF weights with the same graph normalization; and (5) depth/iteration contributions held constant or separately varied. Fix splits, feature depths, classifier, tuning budget, and random seeds across comparisons. Report fold-level uncertainty and per-dataset results; do not select the IDF exponent or normalizer using test folds.
+Raw-count kernels can favor larger graphs or graphs with more feature occurrences. Compare baseline and weighted versions both before and after the same graph-level kernel normalization, with an explicit policy for zero diagonal entries. Keep depth effects separate from feature-frequency effects. A future ablation should use identical folds, classifier, tuning budget, and seeds for raw WL, normalized WL, weighted WL, and weighted-plus-normalized WL. Report fold variation and per-class outcomes. Do not tune the IDF exponent, normalization, or depth on test folds.
 
-## What remains unanswered and evidence strength
+## 9. EGONETS fit and unresolved data questions
 
-No reviewed paper tests this exact graph-document-frequency IDF formula on the EGONETS benchmarks. Whether it improves classification, adds value beyond normalization, behaves usefully when many features occur in very few graphs, or is computationally worthwhile remains unmeasured. The integer class-to-network mapping and the dataset-specific license also remain unresolved, as recorded in the dataset documentation.
+Schulz et al. describe four sets of 50 egonets sampled from Buzznet, Digg, Flickr, and LiveJournal, labeled by source network. The paper describes sampling and constraints but does not supply a full crawl-to-sample reproduction recipe. The GenWL repository provides processed `EGO-1` through `EGO-4` files, each with 200 graphs and four balanced integer classes. In the checked-in files and inspected loader, the integer-to-network mapping is absent. The code repository is GPL-3.0; no separate dataset license was located. The mapping and reuse terms remain unresolved; see [dataset documentation](dataset_documentation.md). Do not substitute a different dataset or publish/re-distribute these data without resolving terms.
 
-Evidence strength for the narrow empirical question (“does this specified IDF adaptation help under a leakage-safe protocol on these EGONETS files?”): **moderate**—the method is sufficiently specified to pose a reproducible ablation after the squared-weight choice is settled, and related literature supplies motivation, but the exact prior-art status remains uncertain and Nguyen et al.'s full text was inaccessible. Evidence for a novelty claim: **weak/insufficient**, particularly given the VeRNAl IDF/WL precedent and the learned subtree-pattern weighting work.
+## 10. Recommendation
 
-## Recommendation
+Retain rarity weighting only as an exploratory baseline comparison, not as a novelty claim or presumed improvement. Before implementation, obtain a legitimate full text of Nguyen et al., extend the targeted prior-art search, settle whether the kernel uses one or two IDF powers, and resolve dataset label semantics and reuse terms. Any later evaluation should be fold-local and separate normalization and depth effects. No kernel, classification experiment, or result is provided by this repository state.
 
-**Refine and retain only as an exploratory baseline comparison, not as a novelty claim.** First obtain the Nguyen et al. full text through an accessible legitimate route and continue exact-formula prior-art checks, particularly around the VeRNAl supplement's IDF weighting. If pursued, frame the question narrowly as an ablation of fold-local unsupervised document-frequency weighting against standard WL, controlling for graph normalization and depth. The generalized WL method is an important comparator in the conceptual discussion, but implementing it is outside this task. Do not proceed to implementation or experiments until the weighting convention, related-work review, label semantics, and data reuse terms are resolved.
+## 11. References and evidence limits
 
-## Sources
-
-Bibliographic details and links are maintained in [references](references.md). The detailed source-by-source review is in [literature review](literature_review.md).
+Complete citations and source links are in [references](references.md). Full text was inspected for Shervashidze et al., Schulz et al., VeRNAl's article/supplement, and SYS2VEC. For Nguyen et al., the publisher page, abstract, repository metadata, and indexed excerpts were reviewed, but the linked full-text endpoint returned HTTP 403; do not treat its detailed objective as fully verified. Search coverage was focused, so unlocated work cannot be treated as nonexistent.

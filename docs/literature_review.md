@@ -4,6 +4,8 @@
 
 This focused review checked the two selected WL papers, the Nguyen et al. paper on learned subtree-pattern importance, and a VeRNAl supplementary methods section that explicitly reports trying IDF in a WL graphlet-hashing similarity method. It also uses a graph-kernel survey for context. Full text was inspected for Shervashidze, Schulz, and the VeRNAl supplement. Nguyen et al.'s publisher page, abstract, and metadata were checked, but its linked full-text endpoint returned HTTP 403. Searches used WL/Weisfeiler–Lehman, subtree-pattern importance, feature weighting, frequency, and inverse document frequency. No inspected source exactly specifies training-graph document frequency and smoothed IDF on exact WL subtree histogram coordinates. The VeRNAl result is close enough to rule out a broad claim that IDF has never been used in a WL-based representation. This bounded review cannot prove absence or establish mathematical equivalence.
 
+The full SYS2VEC paper was also inspected after the initial focused review; it describes TF-IDF on node content before WL hashing and graph embedding. This is relevant related work but does not provide the exact graph-document-frequency weighting of WL histogram coordinates considered here. Search coverage remains focused, not systematic.
+
 ## Shervashidze et al. (2011): baseline WL subtree kernel
 
 The paper constructs a sequence of vertex relabelings by combining each current label with the sorted multiset of neighbor labels. At each depth the graph is represented by counts of its labels; summing the inner products over depths gives the WL subtree kernel. This explicit count-vector interpretation is the baseline relevant to this project. The standard definition does not introduce corpus document frequency or IDF feature weights. See the [JMLR article](https://www.jmlr.org/papers/v12/shervashidze11a.html) and [PDF](https://jmlr.csail.mit.edu/papers/volume12/shervashidze11a/shervashidze11a.pdf). Full text inspected.
@@ -29,6 +31,14 @@ VeRNAl is a tool for fuzzy RNA network-motif discovery. Its supplementary method
 | Nguyen et al. (2021) | Abstract reports learned subtree-pattern importance | Wasserstein WL | Strong precedent for feature-specific weighting; insufficient accessible detail to assess equivalence |
 | Oliver et al. (2021/2022) | IDF terms multiply pairwise comparison scores | Edge-labeled WL graphlet hashing / RNA matching | Direct IDF/WL precedent; different feature unit, matching task, and formula as far as documented |
 | Kriege, Johansson, and Morris (2020) | Survey, not a new weighting method | Graph-kernel families including WL | Context for explicit feature maps; does not settle IDF prior art |
+
+## Bulut, Tenev, and Becker (2021): SYS2VEC
+
+SYS2VEC describes TF-IDF weighting of node content before producing WL-hashable features and applying a Graph2Vec/Doc2Vec-style embedding to software-system variants. The full conference paper was inspected ([PDF](https://www.thinkmind.org/articles/icsea_2021_2_60_10043.pdf), especially §IV-B, printed pp. 63–65). This is relevant precedent for TF-IDF and WL occurring in one graph representation pipeline, but its TF-IDF acts on node content; it does not document IDF weights on exact WL subtree histogram coordinates in the standard WL graph kernel. Its task is software-system representation, not EGONETS graph classification. No DOI was identified in the inspected proceedings record.
+
+| Work | What is weighted or changed | Representation | Relation to candidate |
+|---|---|---|---|
+| Bulut, Tenev, and Becker (2021) | TF-IDF weights node content before WL hashing and Graph2Vec-style embedding | Software-system variants | TF-IDF and WL coexist, but IDF is not applied to WL histogram coordinates |
 
 ## EGONETS provenance and limits
 

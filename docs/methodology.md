@@ -8,6 +8,8 @@ Each example is one source-labeled ego-network graph. The local files use the TU
 
 The planned baseline is the standard 1-WL subtree feature map: count each exact refined node label at each included depth and use an inner product across the concatenated count coordinates. It is not implemented. Any later implementation should be checked for symmetric Gram matrices and PSD behavior; numerical eigenvalue checks are diagnostics, not a proof of correctness.
 
+At depth 0, labels are the initial node labels; each refinement combines a node's current label with the multiset of neighbor labels. The exact label count at a given depth is one feature coordinate. Greater depth describes a wider neighborhood and can make exact features sparser. This baseline is distinct from generalized WL: Schulz et al. compare unfolding trees using a structure- and depth-preserving edit distance, cluster similar trees, and count cluster assignments. Their method changes matching; the candidate below leaves exact matching intact. Nonnegative depth coefficients in the WL framework weight whole refinement levels, not individual features by corpus rarity.
+
 ## Rarity-weighted candidate
 
 The candidate remains **unimplemented and unvalidated**. For a training fold of `N_train` graphs and a depth-specific WL feature `s`, define
@@ -29,6 +31,8 @@ For fixed nonnegative coordinate weights shared by all graphs in a fold, either 
 Raw count dot products can give larger graphs and graphs with more feature occurrences greater norms. Kernel cosine normalization `K(G,H)/sqrt(K(G,G)K(H,H))` is a reasonable controlled comparison, with explicit handling for zero-norm graphs. It changes the kernel and must be held constant across the IDF and baseline comparison. Per-depth scaling is a separate design choice from per-feature IDF.
 
 The minimum useful ablation separates: (1) standard WL counts, (2) standard WL with graph-level normalization, (3) IDF-weighted counts without graph normalization, and (4) IDF-weighted counts with the same normalization. Compare both once-weighted and squared-IDF conventions only if selected in advance. Vary WL depth separately. Keep splits, classifier, tuning budget, and random seeds paired. Calculate `df` within each training fold to avoid evaluation-distribution leakage; use nested or otherwise fold-local model selection.
+
+This weighting question is exploratory rather than a novelty claim. Published related work includes learned subtree-pattern importance in a Wasserstein WL kernel, IDF-scaled pairwise scores in VeRNAl's edge-labeled WL graphlet matching, and SYS2VEC's TF-IDF weighting of node content before WL hashing and graph embedding. These methods use different feature units and objectives; their existence means a broad claim of new WL feature weighting or first use of IDF with WL is not supportable. See [research-gap analysis](research_gap_analysis.md) and [literature review](literature_review.md).
 
 ## Evaluation plan
 
