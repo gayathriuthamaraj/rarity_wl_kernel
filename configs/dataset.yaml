@@ -1,0 +1,9 @@
+dataset_name: EGONETS
+variants: [EGONETS-1, EGONETS-2, EGONETS-3, EGONETS-4]
+source: https://github.com/mlai-bonn/GenWL
+source_commit: 044e6f62b3a1ad14888d58907192a360cd4fda52
+format: TU Dortmund graph kernel text files
+raw_directory: data/raw
+manifest: data/metadata/manifest.json
+expected_graphs_per_variant_paper_reported: 200
+expected_files_per_variant: ["{variant}_A.txt", "{variant}_graph_indicator.txt", "{variant}_graph_labels.txt"]

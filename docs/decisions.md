@@ -1,0 +1,14 @@
+# Decision log
+
+| Date | Decision | Rationale / status |
+|---|---|---|
+| 2026-10-15 | Use EGONETS-1–4 as the target benchmark; retain WL subtree kernel as baseline. | User project brief and selected papers. |
+| 2026-10-15 | Treat rarity weighting as an unverified candidate, not a claimed novel or superior method. | Literature and experiments are incomplete. |
+| 2026-10-15 | Use the paper-linked GenWL files `Data/EGO-1` through `Data/EGO-4`, pinned to commit `044e6f62b3a1ad14888d58907192a360cd4fda52`. | Verified through the repository Git tree and downloaded; no separate archive is supplied. |
+| 2026-10-15 | Retain the repository's `EGO-n` filenames while documenting their equivalence to paper names EGONETS-n. | This is the checked-in naming convention; no files were renamed. |
+| 2026-10-15 | Keep graph label integer-to-network mapping and separate dataset license unresolved. | Neither is specified in the downloaded files or repository notes inspected. |
+| 2026-10-15 | Refine rarity weighting as an exploratory, non-novelty-claim candidate pending fuller review. | The reviewed literature includes learned subtree-pattern importance in WWL (Nguyen et al., 2021), depth-level weighting plus tree-distance clustering in generalized WL (Schulz et al., 2022), and an IDF-weighted comparison variant in VeRNAl's WL edge-graphlet hashing supplement (Oliver et al., 2021/2022). The latter is a direct WL/IDF precedent but uses pairwise RNA graphlet matching, not the candidate's stated exact-label histogram document frequency. The Nguyen full text endpoint was inaccessible, and the search was focused, not exhaustive. |
+| 2026-10-15 | Resolve the candidate's weighting exponent before implementation. | `a(s)c_G(s)` coordinates induce `a(s)^2` feature contributions in the dot product; `sqrt(a(s))c_G(s)` would induce one power. The original brief's formulation is retained as the candidate, with the distinction documented rather than silently changed. |
+| 2026-10-15 | Require a controlled comparison that separates graph normalization from rarity weights and WL depth. | Raw count norms depend on graph/feature counts; otherwise an apparent weighting effect could be caused by normalization or depth choices. Fold-derived document frequencies must use training graphs only. |
+
+Pending: confirmation of separate dataset license; graph-isomorphism duplicate audit; integer-to-source-network label mapping; full-text review of Nguyen et al.; broader exact-formula prior-art search; one-power versus squared-IDF choice; feature normalization; split/tuning details.

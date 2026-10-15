@@ -1,0 +1,16 @@
+project:
+  name: egonets-wl-kernel
+  seed: 42
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  metadata: data/metadata
+dataset:
+  variants: [EGONETS-1, EGONETS-2, EGONETS-3, EGONETS-4]
+  format: unknown_until_source_verified
+experiment:
+  status: planned
+  depth: null
+  folds: 10
+  repetitions: 5

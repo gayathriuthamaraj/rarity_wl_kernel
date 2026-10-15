@@ -1,0 +1,12 @@
+status: planned_not_implemented
+baseline: standard_wl_subtree
+candidate: rarity_weighted_wl_subtree
+depths: [] # Set after literature review and data inspection.
+weighting: null # Define mathematically before implementation.
+cross_validation:
+  strategy: repeated_stratified_k_fold
+  folds: 10
+  repetitions: 5
+  seed: 42
+metrics: [accuracy, macro_f1]
+leakage_control: Fit corpus-dependent feature weights using training folds only.

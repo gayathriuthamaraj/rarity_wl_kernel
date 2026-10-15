@@ -1,0 +1,3 @@
+# Experimental protocol (planned)
+
+No experiment has been run. Before execution, freeze dataset version/checksums, graph parsing rules, variants, splits, random seeds, WL depth, feature normalization, classifier, parameter grid, and scoring. Use identical repeated stratified folds for both methods. Any feature frequency or weight must be estimated using training graphs only; tune within training data. Report accuracy and macro-F1, per-class scores, mean and standard deviation across repetitions, runtime, and uncertainty. Predefine paired statistical comparison and correction if multiple variants/metrics are tested. Save configuration, environment, split assignments, logs, and output tables. Do not use this document as a report of findings.
