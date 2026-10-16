@@ -15,8 +15,6 @@ data/processed/**
 !data/processed/.gitkeep
 results/tables/**
 !results/tables/.gitkeep
-results/figures/**
-!results/figures/.gitkeep
 results/logs/**
 !results/logs/.gitkeep
 logs/**

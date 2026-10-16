@@ -1,0 +1,71 @@
+{
+  "generated_at_utc": "2026-10-15T20:24:34.068715+00:00",
+  "python": "3.12.4",
+  "platform": "Windows 11",
+  "machine": "AMD64",
+  "numpy": "2.5.3",
+  "networkx": "3.3",
+  "scipy": "1.18.1",
+  "sklearn": "1.6.1",
+  "matplotlib": "3.10.1",
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46
+  ],
+  "folds": 10,
+  "repetitions": 5,
+  "classifier": "SVC(kernel='precomputed', C=1.0)",
+  "dataset_files": {
+    "EGO-1/EGO-1_A.txt": {
+      "sha256": "4c6eb3edb62bc892c5aedd56b3eceeeb584a045d52307269bbc434a1d5b1eb52",
+      "bytes": 1447621
+    },
+    "EGO-1/EGO-1_graph_indicator.txt": {
+      "sha256": "2096b42c7283ca482b92e183bc6a62bd0fbba79f91144d7420d0395903573433",
+      "bytes": 96179
+    },
+    "EGO-1/EGO-1_graph_labels.txt": {
+      "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c",
+      "bytes": 400
+    },
+    "EGO-2/EGO-2_A.txt": {
+      "sha256": "8669f0ad8426177eff38f60e1cae8be01c39dadbf5eae02479a63661d65105c1",
+      "bytes": 3568750
+    },
+    "EGO-2/EGO-2_graph_indicator.txt": {
+      "sha256": "1f6f64de22e2e1e1dcbd4ce7ca1434dea29103e6f5d9b2073db8934a81cc85e7",
+      "bytes": 123576
+    },
+    "EGO-2/EGO-2_graph_labels.txt": {
+      "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c",
+      "bytes": 400
+    },
+    "EGO-3/EGO-3_A.txt": {
+      "sha256": "a8cfbaadf26e223344b842cc48ccb8f0cc05327588673366dc87f81af01abdc4",
+      "bytes": 6519771
+    },
+    "EGO-3/EGO-3_graph_indicator.txt": {
+      "sha256": "fa98b820a77ac676af9f2c89f6d2a4942b71488ce7f0339444b1a45a5325f098",
+      "bytes": 152288
+    },
+    "EGO-3/EGO-3_graph_labels.txt": {
+      "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c",
+      "bytes": 400
+    },
+    "EGO-4/EGO-4_A.txt": {
+      "sha256": "0a362fd64077a36fa48e53d5b271aaadf725127aafba40209c4b3dd6c5dcac23",
+      "bytes": 10394424
+    },
+    "EGO-4/EGO-4_graph_indicator.txt": {
+      "sha256": "c520b246af72dc09343ff010b777c44d57cc9b59a1d4c25113a1bf3a43d16835",
+      "bytes": 179823
+    },
+    "EGO-4/EGO-4_graph_labels.txt": {
+      "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c",
+      "bytes": 400
+    }
+  }
+}
