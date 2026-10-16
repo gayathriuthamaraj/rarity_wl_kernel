@@ -2,70 +2,6 @@
   "schema_version": 1,
   "files": [
     {
-      "filename": "EGO-1_A.txt",
-      "relative_path": "EGO-1/EGO-1_A.txt",
-      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-1/EGO-1_A.txt",
-      "retrieved_at_utc": "2026-10-15T14:43:55.369499+00:00",
-      "size_bytes": 1447621,
-      "sha256": "4c6eb3edb62bc892c5aedd56b3eceeeb584a045d52307269bbc434a1d5b1eb52"
-    },
-    {
-      "filename": "EGO-1_graph_indicator.txt",
-      "relative_path": "EGO-1/EGO-1_graph_indicator.txt",
-      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-1/EGO-1_graph_indicator.txt",
-      "retrieved_at_utc": "2026-10-15T14:43:56.855561+00:00",
-      "size_bytes": 96179,
-      "sha256": "2096b42c7283ca482b92e183bc6a62bd0fbba79f91144d7420d0395903573433"
-    },
-    {
-      "filename": "EGO-1_graph_labels.txt",
-      "relative_path": "EGO-1/EGO-1_graph_labels.txt",
-      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-1/EGO-1_graph_labels.txt",
-      "retrieved_at_utc": "2026-10-15T14:43:57.496567+00:00",
-      "size_bytes": 400,
-      "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c"
-    },
-    {
-      "filename": "EGO-2_A.txt",
-      "relative_path": "EGO-2/EGO-2_A.txt",
-      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-2/EGO-2_A.txt",
-      "retrieved_at_utc": "2026-10-15T14:44:00.075195+00:00",
-      "size_bytes": 3568750,
-      "sha256": "8669f0ad8426177eff38f60e1cae8be01c39dadbf5eae02479a63661d65105c1"
-    },
-    {
-      "filename": "EGO-2_graph_indicator.txt",
-      "relative_path": "EGO-2/EGO-2_graph_indicator.txt",
-      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-2/EGO-2_graph_indicator.txt",
-      "retrieved_at_utc": "2026-10-15T14:44:01.167613+00:00",
-      "size_bytes": 123576,
-      "sha256": "1f6f64de22e2e1e1dcbd4ce7ca1434dea29103e6f5d9b2073db8934a81cc85e7"
-    },
-    {
-      "filename": "EGO-2_graph_labels.txt",
-      "relative_path": "EGO-2/EGO-2_graph_labels.txt",
-      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-2/EGO-2_graph_labels.txt",
-      "retrieved_at_utc": "2026-10-15T14:44:01.774455+00:00",
-      "size_bytes": 400,
-      "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c"
-    },
-    {
-      "filename": "EGO-3_A.txt",
-      "relative_path": "EGO-3/EGO-3_A.txt",
-      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-3/EGO-3_A.txt",
-      "retrieved_at_utc": "2026-10-15T14:44:03.924231+00:00",
-      "size_bytes": 6519771,
-      "sha256": "a8cfbaadf26e223344b842cc48ccb8f0cc05327588673366dc87f81af01abdc4"
-    },
-    {
-      "filename": "EGO-3_graph_indicator.txt",
-      "relative_path": "EGO-3/EGO-3_graph_indicator.txt",
-      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-3/EGO-3_graph_indicator.txt",
-      "retrieved_at_utc": "2026-10-15T14:44:04.773755+00:00",
-      "size_bytes": 152288,
-      "sha256": "fa98b820a77ac676af9f2c89f6d2a4942b71488ce7f0339444b1a45a5325f098"
-    },
-    {
       "filename": "EGO-3_graph_labels.txt",
       "relative_path": "EGO-3/EGO-3_graph_labels.txt",
       "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-3/EGO-3_graph_labels.txt",
@@ -74,10 +10,58 @@
       "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c"
     },
     {
+      "filename": "EGO-1_A.txt",
+      "relative_path": "EGO-1/EGO-1_A.txt",
+      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-1/EGO-1_A.txt",
+      "retrieved_at_utc": "2026-10-15T18:53:07.172602+00:00",
+      "size_bytes": 1447621,
+      "sha256": "4c6eb3edb62bc892c5aedd56b3eceeeb584a045d52307269bbc434a1d5b1eb52"
+    },
+    {
+      "filename": "EGO-1_graph_indicator.txt",
+      "relative_path": "EGO-1/EGO-1_graph_indicator.txt",
+      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-1/EGO-1_graph_indicator.txt",
+      "retrieved_at_utc": "2026-10-15T18:53:08.495428+00:00",
+      "size_bytes": 96179,
+      "sha256": "2096b42c7283ca482b92e183bc6a62bd0fbba79f91144d7420d0395903573433"
+    },
+    {
+      "filename": "EGO-1_graph_labels.txt",
+      "relative_path": "EGO-1/EGO-1_graph_labels.txt",
+      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-1/EGO-1_graph_labels.txt",
+      "retrieved_at_utc": "2026-10-15T18:53:08.985195+00:00",
+      "size_bytes": 400,
+      "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c"
+    },
+    {
+      "filename": "EGO-2_A.txt",
+      "relative_path": "EGO-2/EGO-2_A.txt",
+      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-2/EGO-2_A.txt",
+      "retrieved_at_utc": "2026-10-15T18:53:33.856492+00:00",
+      "size_bytes": 3568750,
+      "sha256": "8669f0ad8426177eff38f60e1cae8be01c39dadbf5eae02479a63661d65105c1"
+    },
+    {
+      "filename": "EGO-2_graph_indicator.txt",
+      "relative_path": "EGO-2/EGO-2_graph_indicator.txt",
+      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-2/EGO-2_graph_indicator.txt",
+      "retrieved_at_utc": "2026-10-15T18:53:55.526347+00:00",
+      "size_bytes": 123576,
+      "sha256": "1f6f64de22e2e1e1dcbd4ce7ca1434dea29103e6f5d9b2073db8934a81cc85e7"
+    },
+    {
+      "filename": "EGO-2_graph_labels.txt",
+      "relative_path": "EGO-2/EGO-2_graph_labels.txt",
+      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-2/EGO-2_graph_labels.txt",
+      "retrieved_at_utc": "2026-10-15T18:53:56.100352+00:00",
+      "size_bytes": 400,
+      "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c"
+    },
+    {
       "filename": "EGO-4_A.txt",
       "relative_path": "EGO-4/EGO-4_A.txt",
       "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-4/EGO-4_A.txt",
-      "retrieved_at_utc": "2026-10-15T14:44:06.930530+00:00",
+      "retrieved_at_utc": "2026-10-15T18:55:47.698147+00:00",
       "size_bytes": 10394424,
       "sha256": "0a362fd64077a36fa48e53d5b271aaadf725127aafba40209c4b3dd6c5dcac23"
     },
@@ -85,7 +69,7 @@
       "filename": "EGO-4_graph_indicator.txt",
       "relative_path": "EGO-4/EGO-4_graph_indicator.txt",
       "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-4/EGO-4_graph_indicator.txt",
-      "retrieved_at_utc": "2026-10-15T14:44:07.563790+00:00",
+      "retrieved_at_utc": "2026-10-15T18:56:10.274027+00:00",
       "size_bytes": 179823,
       "sha256": "c520b246af72dc09343ff010b777c44d57cc9b59a1d4c25113a1bf3a43d16835"
     },
@@ -93,9 +77,25 @@
       "filename": "EGO-4_graph_labels.txt",
       "relative_path": "EGO-4/EGO-4_graph_labels.txt",
       "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-4/EGO-4_graph_labels.txt",
-      "retrieved_at_utc": "2026-10-15T14:44:07.994122+00:00",
+      "retrieved_at_utc": "2026-10-15T18:56:31.743083+00:00",
       "size_bytes": 400,
       "sha256": "763eaac55831a1cb8977652f815baca62a400745bfc62c1128260df5ed92fd1c"
+    },
+    {
+      "filename": "EGO-3_A.txt",
+      "relative_path": "EGO-3/EGO-3_A.txt",
+      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-3/EGO-3_A.txt",
+      "retrieved_at_utc": "2026-10-15T18:57:35.574710+00:00",
+      "size_bytes": 6519771,
+      "sha256": "a8cfbaadf26e223344b842cc48ccb8f0cc05327588673366dc87f81af01abdc4"
+    },
+    {
+      "filename": "EGO-3_graph_indicator.txt",
+      "relative_path": "EGO-3/EGO-3_graph_indicator.txt",
+      "source_url": "https://raw.githubusercontent.com/mlai-bonn/GenWL/044e6f62b3a1ad14888d58907192a360cd4fda52/Data/EGO-3/EGO-3_graph_indicator.txt",
+      "retrieved_at_utc": "2026-10-15T18:57:57.559826+00:00",
+      "size_bytes": 152288,
+      "sha256": "fa98b820a77ac676af9f2c89f6d2a4942b71488ce7f0339444b1a45a5325f098"
     }
   ],
   "status": "downloaded_files_present",

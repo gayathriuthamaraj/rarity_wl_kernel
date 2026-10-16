@@ -17,14 +17,14 @@ The standard WL subtree kernel iteratively refines each node label using its cur
 
 ## Status
 
-- Dataset selection: EGONETS.
+- Dataset selection: EGONETS (EGO-1 through EGO-4).
 - Base paper selected: *Weisfeiler-Lehman Graph Kernels* (2011).
 - Reference paper selected: *A Generalized Weisfeiler-Lehman Graph Kernel* (2022 journal version).
 - Baseline: standard WL subtree kernel.
-- Candidate modification: rarity-weighted WL subtree features.
-- Current phase: repository setup and dataset acquisition are complete; a focused literature review is documented, with broader prior-art verification still in progress.
-- Implementation and experiments: not yet completed.
-- Experimental results: none yet.
+- Candidate modification: corpus-rarity-weighted WL subtree features (with leakage-safe training-only weights).
+- Current phase: Part 4 (experiments, analysis, and report) complete.
+- Implementation and experiments: complete.
+- Experimental results: available in `results/`, with figures in `results/figures/`.
 
 ## Dataset acquisition
 

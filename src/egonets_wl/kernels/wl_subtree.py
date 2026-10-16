@@ -124,8 +124,20 @@ class WLSubtreeKernel(GraphKernel):
                 current_h_labels: dict[Any, Any] = {}
                 for v in g.nodes():
                     # Multiset of neighbor labels
-                    neighbor_labels = sorted(prev_labels[u] for u in g.neighbors(v))
-                    signature = (prev_labels[v], tuple(neighbor_labels))
+                    prev_lbl = prev_labels[v]
+                    if prev_lbl is None:
+                        # Node's own (h-1)-subtree was unseen in training; it
+                        # cannot produce a h-subtree matching any train feature.
+                        current_h_labels[v] = None
+                        continue
+                    neigh_labels = [prev_labels[u] for u in g.neighbors(v)]
+                    if None in neigh_labels:
+                        # A neighbor's (h-1)-subtree is unseen in training, so the
+                        # node's h-subtree (which contains it) cannot match either.
+                        current_h_labels[v] = None
+                        continue
+                    neighbor_labels = sorted(neigh_labels)
+                    signature = (prev_lbl, tuple(neighbor_labels))
 
                     if fit:
                         if signature not in comp_dict:

@@ -23,3 +23,5 @@ logs/**
 !logs/.gitkeep
 .ipynb_checkpoints/
 .python-version
+reports/*
+!reports/README.md
