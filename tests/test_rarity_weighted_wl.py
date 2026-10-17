@@ -8,6 +8,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "s
 
 from egonets_wl.kernels.wl_subtree import WLSubtreeKernel
 from egonets_wl.kernels.rarity_weighted_wl import RarityWeightedWLKernel
+from egonets_wl.kernels.wl_edge import WLEdgeKernel, RarityWeightedWLEdgeKernel
+from egonets_wl.kernels.wl_shortest_path import WLShortestPathKernel, RarityWeightedWLShortestPathKernel
 
 
 def _simple_graphs():
@@ -73,3 +75,35 @@ def test_feature_weights_computed_correctly():
     assert rw.feature_weights_.ndim == 1
     # No weight should be zero (eps prevents division by zero)
     assert np.all(rw.feature_weights_ > 0)
+
+
+def test_edge_and_shortest_path_kernels():
+    graphs = _simple_graphs()
+    
+    # Test WL Edge Kernel
+    wl_edge = WLEdgeKernel(n_iter=2, normalize=True)
+    K_edge = wl_edge.fit_transform(graphs)
+    assert K_edge.shape == (3, 3)
+    assert np.allclose(K_edge, K_edge.T)
+    assert np.allclose(np.diag(K_edge), np.ones(3), atol=1e-8)
+
+    # Test Rarity-Weighted WL Edge Kernel
+    rw_edge = RarityWeightedWLEdgeKernel(n_iter=2, weighting="idf", normalize=True)
+    K_rw_edge = rw_edge.fit_transform(graphs)
+    assert K_rw_edge.shape == (3, 3)
+    assert np.allclose(K_rw_edge, K_rw_edge.T)
+    assert np.allclose(np.diag(K_rw_edge), np.ones(3), atol=1e-8)
+
+    # Test WL Shortest Path Kernel
+    wl_sp = WLShortestPathKernel(n_iter=2, normalize=True)
+    K_sp = wl_sp.fit_transform(graphs)
+    assert K_sp.shape == (3, 3)
+    assert np.allclose(K_sp, K_sp.T)
+    assert np.allclose(np.diag(K_sp), np.ones(3), atol=1e-8)
+
+    # Test Rarity-Weighted WL Shortest Path Kernel
+    rw_sp = RarityWeightedWLShortestPathKernel(n_iter=2, weighting="idf", normalize=True)
+    K_rw_sp = rw_sp.fit_transform(graphs)
+    assert K_rw_sp.shape == (3, 3)
+    assert np.allclose(K_rw_sp, K_rw_sp.T)
+    assert np.allclose(np.diag(K_rw_sp), np.ones(3), atol=1e-8)
